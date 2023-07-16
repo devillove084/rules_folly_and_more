@@ -278,7 +278,7 @@ def folly_library(
                native.glob(hdrs, exclude = common_excludes + hdrs_excludes),
         srcs = native.glob(srcs, exclude = common_excludes + srcs_excludes),
         copts = common_copts + select({
-            "@com_github_devillove084_rules_folly//bazel:linux_x86_64": ["-mpclmul"],
+            #"@com_github_devillove084_rules_folly//bazel:linux_x86_64": ["-mpclmul"],
             "//conditions:default": [],
         }),
         includes = ["."],
