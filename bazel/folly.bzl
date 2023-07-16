@@ -102,7 +102,7 @@ def folly_library(
     # required to build them
     common_excludes = []
 
-    # NOTE(storypku): hardcode with_libsodium set to False for now
+    # NOTE(devillove084): hardcode with_libsodium set to False for now
     # Ref: https://github.com/facebook/folly/blob/v2021.09.06.00/CMakeLists.txt#L270
     hdrs_excludes = [
         "folly/experimental/crypto/Blake2xb.h",
@@ -148,7 +148,7 @@ def folly_library(
             "folly/experimental/io/SimpleAsyncIO.cpp",
         ]
 
-    # NOTE(storypku):
+    # NOTE(devillove084):
     # Compare header and source files with that of CMake
     # my_hdrs = native.glob(hdrs, exclude = common_excludes + hdrs_excludes)
     # print("=== # of headers: {} ===".format(len(my_hdrs)))
@@ -197,7 +197,7 @@ def folly_library(
         "@FOLLY_DEMANGLE_MAX_SYMBOL_SIZE": "1024",
     }
 
-    # Note(storypku):
+    # Note(devillove084):
     total_defs = _dict_union(common_defs, {
         "@FOLLY_USE_LIBSTDCPP@": "1",
         "@FOLLY_USE_LIBCPP@": "0",
@@ -230,8 +230,8 @@ def folly_library(
         outs = [
             "folly/folly-config.h.in",
         ],
-        cmd = "$(location @com_github_storypku_rules_folly//bazel:generate_config_in.sh) < $< > $@",
-        tools = ["@com_github_storypku_rules_folly//bazel:generate_config_in.sh"],
+        cmd = "$(location @com_github_devillove084_rules_folly//bazel:generate_config_in.sh) < $< > $@",
+        tools = ["@com_github_devillove084_rules_folly//bazel:generate_config_in.sh"],
     )
 
     expand_template(
@@ -249,8 +249,8 @@ def folly_library(
         outs = [
             "folly/folly-config.h",
         ],
-        cmd = "$(location @com_github_storypku_rules_folly//bazel:strip_config_h.sh) < $< > $@",
-        tools = ["@com_github_storypku_rules_folly//bazel:strip_config_h.sh"],
+        cmd = "$(location @com_github_devillove084_rules_folly//bazel:strip_config_h.sh) < $< > $@",
+        tools = ["@com_github_devillove084_rules_folly//bazel:strip_config_h.sh"],
     )
 
     common_copts = [
@@ -278,7 +278,7 @@ def folly_library(
                native.glob(hdrs, exclude = common_excludes + hdrs_excludes),
         srcs = native.glob(srcs, exclude = common_excludes + srcs_excludes),
         copts = common_copts + select({
-            "@com_github_storypku_rules_folly//bazel:linux_x86_64": ["-mpclmul"],
+            "@com_github_devillove084_rules_folly//bazel:linux_x86_64": ["-mpclmul"],
             "//conditions:default": [],
         }),
         includes = ["."],

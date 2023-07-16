@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// NOTE(storypku): Adapted from
+// NOTE(devillove084): Adapted from
 // https://github.com/facebook/folly/blob/v2021.09.06.00/folly/test/small_vector_test.cpp
 #include "folly/small_vector.h"
 
